@@ -67,6 +67,10 @@ body {
   background: linear-gradient(120deg, rgba(11, 232, 129,1.0),rgba(72, 84, 96,1.0));
   color: "#000";
   line-height: 1.2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
 a {

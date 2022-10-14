@@ -6,7 +6,9 @@ import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 
 const Wrapper = styled(motion.div)`
   width: 100vw;
+
   height: 100vh;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,8 +16,10 @@ const Wrapper = styled(motion.div)`
 `;
 
 const Field = styled(motion.div)`
-  width: 540px;
-  height: 720px;
+  width: 100%;
+  height: 100%;
+  max-width: 540px;
+  max-height: 720px;
   border: 5px solid white;
   padding: 20px;
   display: flex;
@@ -25,8 +29,8 @@ const Field = styled(motion.div)`
 `;
 
 const Area = styled(motion.div)`
-  width: 450px;
-  height: 150px;
+  width: 100%;
+  height: 100%;
   margin: 10px 0px;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 40px;
@@ -58,6 +62,7 @@ const BackNum = styled(motion.span)`
 const playerVars = {
   hover: {
     color: "rgba(255, 221, 89,1.0)",
+    scale: 1.1,
   },
 };
 
@@ -82,8 +87,8 @@ const Overlay = styled(motion.div)`
 `;
 
 const PlayerInfos = styled.div`
-  width: 480px;
-  height: 320px;
+  width: 375px;
+  height: 400px;
   background-color: rgba(255, 255, 255, 1);
   color: rgba(5, 196, 107, 1);
   border-radius: 20px;
@@ -91,10 +96,11 @@ const PlayerInfos = styled.div`
   align-items: center;
   font-size: 30px;
   font-weight: 600;
+  padding: 50px 0px;
 `;
 
 const Photo = styled.div`
-  width: 240px;
+  width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -102,8 +108,7 @@ const Photo = styled.div`
 `;
 
 const Info = styled.div`
-  width: 240px;
-  height: 320px;
+  width: 50%;
   font-size: 50px;
   display: flex;
   flex-direction: column;
@@ -135,15 +140,53 @@ const players: IPlayers[] = [
 const FormationBtns = styled(motion.div)`
   margin-top: 10px;
   display: flex;
+  width: 100%;
+  max-width: 540px;
   button {
     background-color: rgba(255, 255, 255, 1);
     border-radius: 10px;
     border: none;
     color: rgba(5, 196, 107, 1);
     margin: 0px 5px;
-    font-size: 30px;
-    width: 128px;
+    font-size: 20px;
+    width: 25%;
   }
+`;
+const BtnFFT = styled(motion.button)`
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 10px;
+  border: none;
+  color: rgba(5, 196, 107, 1);
+  margin: 0px 5px;
+  font-size: 30px;
+  width: 128px;
+`;
+const BtnFTT = styled(motion.button)`
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 10px;
+  border: none;
+  color: rgba(5, 196, 107, 1);
+  margin: 0px 5px;
+  font-size: 30px;
+  width: 128px;
+`;
+const BtnFTTO = styled(motion.button)`
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 10px;
+  border: none;
+  color: rgba(5, 196, 107, 1);
+  margin: 0px 5px;
+  font-size: 30px;
+  width: 128px;
+`;
+const BtnFTOT = styled(motion.button)`
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 10px;
+  border: none;
+  color: rgba(5, 196, 107, 1);
+  margin: 0px 5px;
+  font-size: 30px;
+  width: 128px;
 `;
 
 function App() {
@@ -597,10 +640,46 @@ function App() {
       )}
 
       <FormationBtns>
-        <button onClick={onFFT}>4-4-2</button>
-        <button onClick={onFTT}>4-3-3</button>
-        <button onClick={onFTTO}>4-2-3-1</button>
-        <button onClick={onFTOT}>4-3-1-2</button>
+        {fFT ? (
+          <BtnFFT
+            style={{ backgroundColor: "rgba(255, 221, 89,1.0)" }}
+            onClick={onFFT}
+          >
+            4-4-2
+          </BtnFFT>
+        ) : (
+          <BtnFFT onClick={onFFT}>4-4-2</BtnFFT>
+        )}
+        {fTT ? (
+          <BtnFTT
+            style={{ backgroundColor: "rgba(255, 221, 89,1.0)" }}
+            onClick={onFTT}
+          >
+            4-3-3
+          </BtnFTT>
+        ) : (
+          <BtnFTT onClick={onFTT}>4-3-3</BtnFTT>
+        )}
+        {fTTO ? (
+          <BtnFTTO
+            style={{ backgroundColor: "rgba(255, 221, 89,1.0)" }}
+            onClick={onFTTO}
+          >
+            4-2-3-1
+          </BtnFTTO>
+        ) : (
+          <BtnFTTO onClick={onFTTO}>4-2-3-1</BtnFTTO>
+        )}
+        {fTOT ? (
+          <BtnFTOT
+            style={{ backgroundColor: "rgba(255, 221, 89,1.0)" }}
+            onClick={onFTOT}
+          >
+            4-3-1-2
+          </BtnFTOT>
+        ) : (
+          <BtnFTOT onClick={onFTOT}>4-3-1-2</BtnFTOT>
+        )}
       </FormationBtns>
       <AnimatePresence>
         {id ? (
@@ -636,31 +715,3 @@ function App() {
 }
 
 export default App;
-
-/*
-function App() {
-  const [id, setId] = useState<null | string>(null);
-
-  return (
-    <Wrapper>
-      <Grid>
-        {["1", "2", "3", "4"].map((i) => (
-          <Box onClick={() => setId(i)} key={i} layoutId={i} />
-        ))}
-      </Grid>
-      <AnimatePresence>
-        {id ? (
-          <Overlay
-            onClick={() => setId(null)}
-            initial={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
-            animate={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-            exit={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
-          >
-            <Box layoutId={id} style={{ width: 400, height: 200 }}></Box>
-          </Overlay>
-        ) : null}
-      </AnimatePresence>
-    </Wrapper>
-  );
-}
-*/
